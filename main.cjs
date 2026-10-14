@@ -31,11 +31,7 @@ ipcMain.on('print-page', (event) => {
   if (win) win.webContents.print({ printBackground: true });
 });
 
-session.defaultSession.setPermissionRequestHandler(
-  (_webContents, permission, callback) => {
-    callback(['media'].includes(permission));
-  }
-);
+
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -72,6 +68,12 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  session.defaultSession.setPermissionRequestHandler(
+    (_webContents, permission, callback) => {
+      callback(['media'].includes(permission));
+    }
+  );
+
   createWindow();
 
   app.on('activate', () => {
