@@ -2,9 +2,10 @@
   "name": "medinex",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.cjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "electron-builder --win nsis"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +15,35 @@
     "@capacitor/android": "^8.5.3",
     "@capacitor/cli": "^8.5.3",
     "@capacitor/core": "^8.5.3"
+  },
+  "devDependencies": {
+    "electron": "^22.3.27",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.agency.medinex",
+    "productName": "MEDINEX ERP",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.cjs",
+      "preload.cjs",
+      "www/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": "true",
+      "perMachine": "false"
+    }
   }
 }
